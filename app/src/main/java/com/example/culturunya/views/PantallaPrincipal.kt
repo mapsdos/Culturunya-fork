@@ -18,8 +18,14 @@ import com.example.culturunya.R
 import com.example.culturunya.ui.theme.*
 import com.example.culturunya.viewmodels.EventViewModel
 import androidx.annotation.RequiresApi
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.CalendarMonth
+import androidx.compose.material.icons.filled.List
+import androidx.compose.material.icons.filled.Map
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.ImageVector
+import com.example.culturunya.screens.LeaderboardScreen
 import androidx.compose.ui.platform.LocalContext
 import com.example.culturunya.session.CurrentSession
 import com.example.culturunya.views.getString
@@ -110,7 +116,7 @@ fun MainScreen(navController: NavController, viewModel: EventViewModel, initialS
                 }
 
                 "Quiz" -> QuizScreen(navController)
-                "Leaderboard" -> LeaderboardScreen()
+                "Leaderboard" -> LeaderboardScreen(navController)
                 "Settings" -> SettingsScreen(navController)
             }
         }
@@ -163,7 +169,7 @@ fun MainScreen(navController: NavController, viewModel: EventViewModel, initialS
 @Composable
 fun TopButtonItem(
     subScreenName: String,
-    @DrawableRes iconRes: Int,
+    icon: ImageVector,
     isSelected: Boolean,
     onClick: () -> Unit
 ) {
@@ -186,7 +192,7 @@ fun TopButtonItem(
     ) {
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
             Icon(
-                painter = painterResource(id = iconRes),
+                imageVector = icon,
                 contentDescription = subScreenName
             )
             Spacer(modifier = Modifier.height(4.dp))
@@ -254,9 +260,4 @@ fun EventListScreen(viewModel: EventViewModel) {
 @Composable
 fun QuizScreen(navController: NavController) {
     PantallaQuiz(navController)
-}
-
-@Composable
-fun LeaderboardScreen() {
-    Text(text = "Aquesta serà la pantalla de Leaderboard")
 }
