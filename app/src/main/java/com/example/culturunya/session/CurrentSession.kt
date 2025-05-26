@@ -72,7 +72,6 @@ class CurrentSession private constructor() {
             Companion.email = email
             Companion.profile_pic = profile_pic
             Companion.language = language
-            Companion.is_admin = is_admin
             Companion.rank_quiz = rank_quiz
             Companion.rank_event = rank_event
             Companion.current_quiz_points = current_quiz_points
