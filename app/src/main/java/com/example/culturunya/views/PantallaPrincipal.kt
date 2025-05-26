@@ -26,10 +26,19 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import com.example.culturunya.screens.LeaderboardScreen
+import androidx.compose.ui.platform.LocalContext
+import com.example.culturunya.session.CurrentSession
+import com.example.culturunya.views.getString
+import androidx.compose.ui.platform.LocalContext
+import com.example.culturunya.views.getString
 
 @RequiresApi(Build.VERSION_CODES.O)
 @Composable
 fun MainScreen(navController: NavController, viewModel: EventViewModel, initialScreen: String) {
+    val context = LocalContext.current
+    CurrentSession.getInstance()
+    val currentLocale = CurrentSession.language
+
     // Estat per a la pantalla principal
     // Estat per als sub-botons d'Events (Map, Calendar, List)
     // Només s'usa si la pantalla principal seleccionada és "Events".
@@ -62,8 +71,8 @@ fun MainScreen(navController: NavController, viewModel: EventViewModel, initialS
             ) {
                 // Botó MAP
                 TopButtonItem(
-                    subScreenName = "Map",
-                    icon = Icons.Default.Map,
+                    subScreenName = getString(context, R.string.nav_map, currentLocale),
+                    iconRes = R.drawable.ic_map,
                     isSelected = (currentEventsSubScreen == "Map")
                 ) {
                     currentEventsSubScreen = "Map"
@@ -71,8 +80,8 @@ fun MainScreen(navController: NavController, viewModel: EventViewModel, initialS
 
                 // Botó CALENDAR
                 TopButtonItem(
-                    subScreenName = "Calendar",
-                    icon = Icons.Default.CalendarMonth,
+                    subScreenName = getString(context, R.string.nav_calendar, currentLocale),
+                    iconRes = R.drawable.ic_calendar,
                     isSelected = (currentEventsSubScreen == "Calendar")
                 ) {
                     currentEventsSubScreen = "Calendar"
@@ -80,8 +89,8 @@ fun MainScreen(navController: NavController, viewModel: EventViewModel, initialS
 
                 // Botó LIST
                 TopButtonItem(
-                    subScreenName = "List",
-                    icon = Icons.Default.List,
+                    subScreenName = getString(context, R.string.nav_list, currentLocale),
+                    iconRes = R.drawable.ic_list,
                     isSelected = (currentEventsSubScreen == "List")
                 ) {
                     currentEventsSubScreen = "List"
@@ -121,17 +130,16 @@ fun MainScreen(navController: NavController, viewModel: EventViewModel, initialS
             verticalAlignment = Alignment.CenterVertically
         ) {
             BottomButtonItem(
-                screenName = "Events",
+                screenName = getString(context, R.string.nav_events, currentLocale),
                 iconRes = R.drawable.ic_events,
                 isSelected = currentScreen == "Events"
             ) {
                 currentScreen = "Events"
-                // Si canvia a Events, assegurem que Map quedi seleccionat per defecte
                 currentEventsSubScreen = "Map"
             }
 
             BottomButtonItem(
-                screenName = "Quiz",
+                screenName = getString(context, R.string.nav_quiz, currentLocale),
                 iconRes = R.drawable.ic_quiz,
                 isSelected = currentScreen == "Quiz"
             ) {
@@ -139,7 +147,7 @@ fun MainScreen(navController: NavController, viewModel: EventViewModel, initialS
             }
 
             BottomButtonItem(
-                screenName = "Leaderboard",
+                screenName = getString(context, R.string.nav_leaderboard, currentLocale),
                 iconRes = R.drawable.ic_leaderboard,
                 isSelected = currentScreen == "Leaderboard"
             ) {
@@ -147,12 +155,10 @@ fun MainScreen(navController: NavController, viewModel: EventViewModel, initialS
             }
 
             BottomButtonItem(
-                screenName = "Settings",
+                screenName = getString(context, R.string.nav_settings, currentLocale),
                 iconRes = R.drawable.ic_settings,
-                isSelected = currentScreen == "Settings",
-
-                ) {
-
+                isSelected = currentScreen == "Settings"
+            ) {
                 currentScreen = "Settings"
             }
         }
